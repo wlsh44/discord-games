@@ -32,12 +32,6 @@ public class CreateCatchMusicService {
         for (int roundNumber = 1; roundNumber <= musicList.size(); roundNumber++) {
             rounds.add(new Round(roundNumber, musicList.get(roundNumber - 1)));
         }
-//        List<Round> rounds = List.of(
-//                new Round(1, new Music("꿈의 거처", "이승윤")),
-//                new Round(2, new Music("겨울잠", "아이유")),
-//                new Round(3, new Music("photograph", "ed sheeran")),
-//                new Round(4, new Music("enchanted", "taylor swift"))
-//        );
         CatchMusic catchMusic = catchMusicRepository.save(CatchMusic.startGame(guildId, rounds, new Tag(radio.name()), finishScore));
         Music music = catchMusic.getCurrentRound().getMusic();
         audioPlayerService.play(guildId, music.name(), music.artist());

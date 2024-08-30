@@ -1,6 +1,7 @@
 package wlsh.project.discordgames.discord;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
@@ -10,6 +11,7 @@ import wlsh.project.discordgames.discord.command.ICommand;
 
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CommandEventListener extends ListenerAdapter {
@@ -36,6 +38,7 @@ public class CommandEventListener extends ListenerAdapter {
                 try {
                     command.execute(event);
                 } catch (Exception e) {
+                    log.error("", e);
                     event.reply(e.getMessage()).queue();
                 }
                 return;

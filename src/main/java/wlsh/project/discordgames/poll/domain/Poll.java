@@ -27,10 +27,16 @@ public class Poll {
     }
 
     public void vote(Voter voter) {
+        if (finished) {
+            return;
+        }
         voters.add(voter);
     }
 
     public boolean isMajority() {
+        if (finished) {
+            return false;
+        }
         long approveCount = voters.stream()
                 .filter(Voter::approve)
                 .count();
