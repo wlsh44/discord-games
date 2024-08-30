@@ -25,19 +25,19 @@ public class ChannelValidator {
 
     public static void checkInAudioChannel(GuildVoiceState memberVoiceState) {
         if (!memberVoiceState.inAudioChannel()) {
-            throw new RuntimeException("음성 채널에 들어와있어야 합니다.");
+//            throw new RuntimeException("음성 채널에 들어와있어야 합니다.");
         }
     }
 
     public static void checkIsCatchMusicTextChannel(Channel textChannel, Channel botChannel) {
         if (!botChannel.getName().equals(textChannel.getName())) {
-            throw new RuntimeException("봇과 같은 이름의 채팅 채널에서 채팅해주세요.");
+//            throw new RuntimeException("봇과 같은 이름의 채팅 채널에서 채팅해주세요.");
         }
     }
 
     public static void checkBotInAudioChannel(GuildVoiceState botVoiceState) {
         if (!botVoiceState.inAudioChannel()) {
-            throw new RuntimeException("게임을 시작해주세요.");
+//            throw new RuntimeException("게임을 시작해주세요.");
         }
     }
 }

@@ -29,7 +29,7 @@ public class AnswerDispatcher extends ListenerAdapter {
         User author = event.getAuthor();
         Message message = event.getMessage();
 
-        if (author.isBot()) {
+        if (author.isBot() || event.getChannel().getName().equals("캐치포켓몬")) {
             return;
         }
         try {

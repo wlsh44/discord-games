@@ -1,8 +1,11 @@
 package wlsh.project.discordgames.catchmusic.application;
 
+import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
+import wlsh.project.discordgames.catchmusic.domain.Music;
+
 public record AnswerCorrectEvent(
         String guildId,
         String username,
-        wlsh.project.discordgames.catchmusic.domain.CatchMusic catchMusic,
-        wlsh.project.discordgames.catchmusic.domain.Music currentMusic) {
+        CatchMusic catchMusic,
+        Music currentMusic) {
 }
