@@ -53,7 +53,6 @@ public class SkipDispatcher implements ICommand {
                 .complete();
 //        message.pin().queue();
         MessagePoll poll = message.getPoll();
-
 //        SkipResponse skip = skipService.skip(event.getGuild().getId());
 //        event.reply("스킵되었습니다. 정답 %s - %s".formatted(skip.musicName(), skip.artist())).queue();
     }

@@ -14,7 +14,6 @@ import wlsh.project.discordgames.discord.util.DiscordMessageHandler;
 @RequiredArgsConstructor
 public class AnswerEventListener {
 
-    private final ChannelRepository channelRepository;
     private final CatchMusicStatusService catchMusicStatusService;
     private final DiscordMessageHandler messageHandler;
     private final AudioPlayerService audioPlayerService;

@@ -47,7 +47,7 @@ public class StartDispatcher implements ICommand {
         Member bot = requireNonNull(event.getGuild()).getSelfMember();
         GuildVoiceState botVoiceState = requireNonNull(bot.getVoiceState());
 
-        channelRepository.save(event.getGuild().getId(), event.getChannel());
+        channelRepository.save(event.getChannelId(), event.getChannel());
 
         openBotIfNotInAudioChannel(event, botVoiceState, memberVoiceState);
     }

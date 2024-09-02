@@ -11,7 +11,6 @@ import wlsh.project.discordgames.pokemon.domain.CatchPokemonRepository;
 @RequiredArgsConstructor
 public class CatchPokemonAnswerEventListener {
 
-    private final ChannelRepository channelRepository;
     private final CatchPokemonStatusService catchPokemonStatusService;
     private final DiscordMessageHandler messageHandler;
     private final CatchPokemonRepository catchPokemonRepository;

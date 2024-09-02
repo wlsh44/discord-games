@@ -38,6 +38,6 @@ public class MessageEventListener extends ListenerAdapter {
 
         Guild guild = event.getGuild();
         guildRepository.save(guild.getId(), guild);
-        channelRepository.save(guild.getId(), message.getChannel());
+        channelRepository.save(event.getChannel().getId(), message.getChannel());
     }
 }
