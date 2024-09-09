@@ -2,10 +2,6 @@ package wlsh.project.discordgames.catchmusic.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
-import wlsh.project.discordgames.catchgames.common.catchgames.domain.Round;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class Round2Test {
 

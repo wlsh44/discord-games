@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.stereotype.Component;
-import wlsh.project.discordgames.catchgames.catchmusic.application.hint.dto.TitleHintResult;
+import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 import wlsh.project.discordgames.discord.command.ICommand;
 import wlsh.project.discordgames.pokemon.application.CatchPokemonNameHintService;
 

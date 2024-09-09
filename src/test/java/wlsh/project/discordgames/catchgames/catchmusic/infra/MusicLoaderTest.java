@@ -3,10 +3,11 @@ package wlsh.project.discordgames.catchgames.catchmusic.infra;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
-import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.CBSRadio;
-import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
+import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
+import wlsh.project.discordgames.catchmusic.domain.Music;
+import wlsh.project.discordgames.catchmusic.infra.MusicLoader;
+import wlsh.project.discordgames.catchmusic.infra.crawler.CBSRadio;
+import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
