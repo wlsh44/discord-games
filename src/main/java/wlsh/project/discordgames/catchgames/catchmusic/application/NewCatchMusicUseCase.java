@@ -4,11 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRepository;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRound;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Radio;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGameId;
-import wlsh.project.discordgames.discord.AudioPlayerService;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 
 @Service
 @RequiredArgsConstructor

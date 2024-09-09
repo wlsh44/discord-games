@@ -1,5 +1,6 @@
 package wlsh.project.discordgames.catchgames.catchmusic.infra.crawler;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,6 +19,7 @@ import static wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Craw
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class MbcFM4UCrawler {
 
     public List<Music> crawl(Radio radio) {
@@ -36,7 +38,7 @@ public class MbcFM4UCrawler {
                     String title = row.select("td").get(1).text().replaceAll("`", "'");
                     String artist = row.select("td").get(2).text();
 
-                    if (Radio.MUSIC_PARTY.equals(radio) && ("Over The Sea".equals(title) || "So What's New?".equals(title) || "봄바람".equals(title) || "Kids".equals(title))) {
+                    if (Radio.MUSIC_PARTY.equals(radio) && ("Over The Sea".equals(title) || "So What's New?".equals(title) || "봄바람".equals(title) || "Kids".equals(title)) || "Freedom At Midnight".equals(title)) {
                         continue;
                     } else if (Radio.BRUNCH_CAFE.equals(radio) && ("구름 위를 걷다".equals(title))) {
                         continue;
@@ -44,8 +46,8 @@ public class MbcFM4UCrawler {
                         continue;
                     }
 
-                    log.info("노래: {}, 가수: {}", title, artist);
-                    musicList.add(Music.of(title, artist));
+                    Music music = Music.of(title, artist);
+                    musicList.add(music);
                 }
             }
             return musicList;

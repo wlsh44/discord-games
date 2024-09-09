@@ -10,7 +10,7 @@ public class DefaultTitleHintState implements TitleHintState {
     public TitleHintResult getHint(TitleHintContext context, Hint hint) {
         hint.getHintCharacters().stream()
                 .filter(hintCharacter -> !hintCharacter.isWhiteSpace())
-                .forEach(hintCharacter -> hintCharacter.updateHint("⚪️"));
+                .forEach(hintCharacter -> hintCharacter.updateHint("⚪"));
 
         if (hint.isSpecialCharacter()) {
             context.setState(new SpecialCharacterHintState());

@@ -1,7 +1,7 @@
 package wlsh.project.discordgames.catchgames.catchmusic.domain;
 
 import lombok.Getter;
-import wlsh.project.discordgames.catchgames.common.domain.Round;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.Round;
 
 @Getter
 public class CatchMusicRound extends Round {

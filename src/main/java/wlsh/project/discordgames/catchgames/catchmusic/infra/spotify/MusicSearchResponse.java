@@ -13,7 +13,8 @@ public record MusicSearchResponse(
     ) {}
 
     public record Item(
-            Album album
+            Album album,
+            int popularity
     ) {}
 
     public record Album(

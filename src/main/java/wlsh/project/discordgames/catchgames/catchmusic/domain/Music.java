@@ -6,12 +6,19 @@ import java.util.regex.Pattern;
 public record Music(
         String name,
         String secondName,
-        String artist
+        Artist artist,
+        Album album,
+        int popularity,
+        String releaseDate
 ) {
 
-    public static Music of(String title, String artist) {
+    public static Music of(String title, String artistName) {
         String secondName = extractSecondName(title);
-        return new Music(title, secondName, artist);
+        return new Music(title, secondName, new Artist(artistName, null), null, 0, null);
+    }
+
+    public static Music of(String title, String secondName, Artist artist, Album album, int popularity, String releaseDate) {
+        return new Music(title, secondName, artist, album, popularity, releaseDate);
     }
 
     private static String extractSecondName(String title) {

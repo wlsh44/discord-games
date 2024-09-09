@@ -1,24 +1,20 @@
 package wlsh.project.discordgames.catchgames.catchmusic.application.dto;
 
-import lombok.Getter;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
 
-@Getter
 public record AnswerResult(
         Status status,
         Object content
 ) {
 
-    public static AnswerResult incorrect() {
-        return new AnswerResult(Status.INCORRECT, null);
-    }
+    public static final AnswerResult INCORRECT = new AnswerResult(Status.INCORRECT, null);
 
     public static AnswerResult correct(Music currentMusic, Music nextMusic, CatchMusicStatus status) {
         return new AnswerResult(Status.CORRECT, new CorrectContent(currentMusic, nextMusic, status));
     }
 
-    public static AnswerResult finish() {
-        return new AnswerResult(Status.FINISH, null);
+    public static AnswerResult finish(CatchMusicStatus status) {
+        return new AnswerResult(Status.FINISH, new FinishContent(status));
     }
 
     public enum Status {
@@ -28,6 +24,10 @@ public record AnswerResult(
     public record CorrectContent(
             Music currentMusic,
             Music nextMusic,
+            CatchMusicStatus status
+    ) { }
+
+    public record FinishContent(
             CatchMusicStatus status
     ) { }
 }

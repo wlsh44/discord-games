@@ -2,8 +2,8 @@ package wlsh.project.discordgames.catchgames.catchmusic.domain;
 
 import lombok.Getter;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Radio;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGame;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGameId;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGame;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 
 @Getter
 public class CatchMusic extends CatchGame {
@@ -16,7 +16,11 @@ public class CatchMusic extends CatchGame {
     }
 
     public static CatchMusic startGame(CatchGameId catchGameId, Radio radio, int finishScore) {
-        return new CatchMusic(catchGameId, 1, radio, finishScore);
+        return new CatchMusic(catchGameId, 0, radio, finishScore);
+    }
+
+    public CatchMusicRound getCurrentRound() {
+        return (CatchMusicRound) rounds.get(currentRoundNumber - 1);
     }
 //
 //    public boolean answer(Player player) {

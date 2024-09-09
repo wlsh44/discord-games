@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.catchgames.catchmusic.application.dto.CatchMusicStatus;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
-import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRepository;
-import wlsh.project.discordgames.catchgames.common.domain.Round;
-import wlsh.project.discordgames.discord.util.DiscordMessageHandler;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.Round;
 
 import java.util.List;
 import java.util.Map;

@@ -11,14 +11,14 @@ import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRound;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Radio;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGameId;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.discord.command.ICommand;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-import static wlsh.project.discordgames.catchmusic.ChannelValidator.checkValidChannelState;
+import static wlsh.project.discordgames.catchgames.catchmusic.ui.ChannelValidator.checkValidChannelState;
 
 @Component
 @RequiredArgsConstructor
@@ -59,7 +59,7 @@ public class NewCatchMusicDispatcher implements ICommand {
         CatchMusic catchMusic = newCatchMusicUseCase.newCatchMusic(catchGameId, Radio.valueOf(tag), finalScore);
         event.reply("게임이 시작됩니다.").queue();
 
-        CatchMusicRound round = (CatchMusicRound) catchMusic.getCurrentRound();
+        CatchMusicRound round = catchMusic.getCurrentRound();
         Music music = round.getMusic();
         musicPlayerHandler.playMusic(new PlayMusicEvent(catchGameId, music));
     }

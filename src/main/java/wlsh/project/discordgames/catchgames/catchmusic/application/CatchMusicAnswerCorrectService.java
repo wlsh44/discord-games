@@ -9,7 +9,7 @@ import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRepository;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusicRound;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGameId;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 
 @Service
 @RequiredArgsConstructor
@@ -27,11 +27,11 @@ public class CatchMusicAnswerCorrectService {
 
         if (catchMusic.isFinished()) {
             catchMusicRepository.delete(catchGameId);
-            return AnswerResult.finish();
+            return AnswerResult.finish(status);
         } else {
-            Music currentMusic = ((CatchMusicRound) catchMusic.getCurrentRound()).getMusic();
+            Music currentMusic = catchMusic.getCurrentRound().getMusic();
             addCatchMusicRoundService.addRound(catchMusic);
-            Music nextMusic = ((CatchMusicRound) catchMusic.getCurrentRound()).getMusic();
+            Music nextMusic = catchMusic.getCurrentRound().getMusic();
             return AnswerResult.correct(currentMusic, nextMusic, status);
         }
     }

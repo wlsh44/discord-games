@@ -1,7 +1,7 @@
 package wlsh.project.discordgames.catchgames.catchmusic.domain;
 
 import org.springframework.stereotype.Repository;
-import wlsh.project.discordgames.catchgames.common.domain.CatchGameId;
+import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 
 import java.util.Optional;
 

@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import lombok.Getter;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -57,6 +58,8 @@ public class TrackScheduler extends AudioEventAdapter {
     }
 
     public AudioTrackInfo getPlayingTrackInfo() {
-        return player.getPlayingTrack().getInfo();
+        return Optional.ofNullable(player.getPlayingTrack())
+                .map(AudioTrack::getInfo)
+                .orElseGet(() -> new AudioTrackInfo(null, null, 0, null, false, null));
     }
 }

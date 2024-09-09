@@ -7,14 +7,13 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.stereotype.Component;
-import wlsh.project.discordgames.catchmusic.application.TitleHintResult;
+import wlsh.project.discordgames.catchgames.catchmusic.application.hint.dto.TitleHintResult;
 import wlsh.project.discordgames.discord.command.ICommand;
 import wlsh.project.discordgames.pokemon.application.CatchPokemonNameHintService;
 
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-import static wlsh.project.discordgames.catchmusic.ChannelValidator.checkValidChannelState;
 
 @Component
 @RequiredArgsConstructor
