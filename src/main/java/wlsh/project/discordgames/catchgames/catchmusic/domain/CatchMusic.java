@@ -5,18 +5,21 @@ import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Radio;
 import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGame;
 import wlsh.project.discordgames.catchgames.common.catchgames.domain.CatchGameId;
 
+import java.util.List;
+
 @Getter
 public class CatchMusic extends CatchGame {
 
     private Radio radio;
 
-    public CatchMusic(CatchGameId catchGameId, int currentRoundNumber, Radio radio, int finishScore) {
-        super(catchGameId, currentRoundNumber, finishScore);
+
+    public CatchMusic(CatchGameId catchGameId, int currentRoundNumber, List<FilterOption> filterOptions, Radio radio, int finishScore) {
+        super(catchGameId, currentRoundNumber, finishScore, filterOptions);
         this.radio = radio;
     }
 
-    public static CatchMusic startGame(CatchGameId catchGameId, Radio radio, int finishScore) {
-        return new CatchMusic(catchGameId, 0, radio, finishScore);
+    public static CatchMusic startGame(CatchGameId catchGameId, int finishScore, List<FilterOption> filterOptions, Radio radio) {
+        return new CatchMusic(catchGameId, 0, filterOptions, radio, finishScore);
     }
 
     public CatchMusicRound getCurrentRound() {

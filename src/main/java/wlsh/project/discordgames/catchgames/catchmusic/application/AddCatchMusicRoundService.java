@@ -14,12 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AddCatchMusicRoundService {
 
-    //    private final MbcFM4UCrawler mbcFM4UCrawler;
     private final MusicLoader musicLoader;
 
     public void addRound(CatchMusic catchMusic) {
-//        List<Music> musicList = mbcFM4UCrawler.crawl(catchMusic.getRadio());
-        Music music = musicLoader.loadMusic(catchMusic, 25);
+        Music music = musicLoader.loadMusic(catchMusic);
         catchMusic.updateNewRound(CatchMusicRound.prototype(music));
     }
 }

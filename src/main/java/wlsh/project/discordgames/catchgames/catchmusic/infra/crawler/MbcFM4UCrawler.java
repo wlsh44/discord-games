@@ -12,7 +12,6 @@ import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.CrawlerConfig.MBC_FM4U_URL;
 
@@ -20,12 +19,11 @@ import static wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.Craw
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class MbcFM4UCrawler {
+public class MbcFM4UCrawler implements RadioCrawler {
 
     public List<Music> crawl(Radio radio) {
         try {
-            int seqID = new Random().nextInt(radio.getMinSeqId(), radio.getMaxSeqId() + 1);
-            String url = MBC_FM4U_URL + "?seqID=" + seqID + "&progCode=" + radio.getProgCode();
+            String url = MBC_FM4U_URL + "?seqID=" + radio.getRandom() + "&progCode=" + radio.getProgramCode();
 
             log.info("search artistUrl: {}", url);
 
@@ -38,11 +36,11 @@ public class MbcFM4UCrawler {
                     String title = row.select("td").get(1).text().replaceAll("`", "'");
                     String artist = row.select("td").get(2).text();
 
-                    if (Radio.MUSIC_PARTY.equals(radio) && ("Over The Sea".equals(title) || "So What's New?".equals(title) || "봄바람".equals(title) || "Kids".equals(title)) || "Freedom At Midnight".equals(title)) {
+                    if (MBCRadio.MUSIC_PARTY.equals(radio) && ("Over The Sea".equals(title) || "So What's New?".equals(title) || "봄바람".equals(title) || "Kids".equals(title)) || "Freedom At Midnight".equals(title)) {
                         continue;
-                    } else if (Radio.BRUNCH_CAFE.equals(radio) && ("구름 위를 걷다".equals(title))) {
+                    } else if (MBCRadio.BRUNCH_CAFE.equals(radio) && ("구름 위를 걷다".equals(title))) {
                         continue;
-                    } else if (Radio.STARNIGHT.equals(radio) && title.contains("가을의 기도")) {
+                    } else if (MBCRadio.STARNIGHT.equals(radio) && title.contains("가을의 기도")) {
                         continue;
                     }
 

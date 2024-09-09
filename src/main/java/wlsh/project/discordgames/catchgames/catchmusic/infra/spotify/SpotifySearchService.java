@@ -76,7 +76,9 @@ public class SpotifySearchService {
                 .filter(item -> item.album().artists().get(0).id().equals(artistInfo.spotifyId()))
                 .findFirst()
                 .orElseGet(() -> {
-                    if (items.get(0).album().artists().get(0).name().equals(music.artist())) {
+                    String name = items.get(0).album().artists().get(0).name().toLowerCase();
+                    String name2 = music.artist().name().toLowerCase();
+                    if (name.equals(name2)) {
                         return items.get(0);
                     }
                     throw new RuntimeException("앨범 정보를 찾지 못했습니다.");
@@ -85,7 +87,7 @@ public class SpotifySearchService {
         String albumImage = album
                 .images()
                 .get(0).url();
-        return new MusicInfo(music.name(), artistInfo.artistName(), artistInfo.url(), albumImage, album.name(), album.releaseDate(), mostRelevantItem.popularity());
+        return new MusicInfo(mostRelevantItem.name(), artistInfo.artistName(), artistInfo.url(), albumImage, album.name(), album.releaseDate(), mostRelevantItem.popularity());
     }
 
     private void handleError(String data, ClientHttpResponse response) throws IOException {

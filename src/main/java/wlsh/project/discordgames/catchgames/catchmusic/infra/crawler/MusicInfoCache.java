@@ -22,7 +22,7 @@ public class MusicInfoCache {
         if (o1.popularity() == o2.popularity()) {
             return 0;
         } else {
-            return o1.popularity() - o2.popularity();
+            return o2.popularity() - o1.popularity();
         }
     });
 

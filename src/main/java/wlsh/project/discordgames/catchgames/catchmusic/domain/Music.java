@@ -31,7 +31,8 @@ public record Music(
             // Check if the text inside the parentheses does not start with "feat", "song", "duet", etc.
             if (!(insideParentheses.contains("feat") || insideParentheses.contains("song") || insideParentheses.contains("duet") ||
                     insideParentheses.contains("ver") || insideParentheses.contains("version") || insideParentheses.contains("edit")) ||
-                insideParentheses.contains("from")) {
+                insideParentheses.contains("from") || insideParentheses.contains("remaster") || insideParentheses.contains("cf") ||
+                    insideParentheses.contains("ver")) {
                 return matcher.group(1).trim();
             }
         }

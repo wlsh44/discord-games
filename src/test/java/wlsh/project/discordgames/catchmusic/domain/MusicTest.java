@@ -3,6 +3,7 @@ package wlsh.project.discordgames.catchmusic.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.junit.jupiter.api.Assertions.*;

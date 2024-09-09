@@ -1,7 +1,7 @@
 package wlsh.project.discordgames.catchgames.common.catchgames.domain;
 
 import lombok.Getter;
-import wlsh.project.discordgames.pokemon.domain.Round2;
+import wlsh.project.discordgames.catchgames.catchmusic.domain.FilterOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,21 @@ public abstract class CatchGame {
     protected int finishScore;
 
     protected List<Round> rounds = new ArrayList<>();
+    private List<FilterOption> filterOptions = new ArrayList<>();
 
-    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<Round> rounds) {
+    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<Round> rounds, List<FilterOption> filterOptions) {
         this.catchGameId = catchGameId;
         this.currentRoundNumber = currentRoundNumber;
         this.finishScore = finishScore;
         this.rounds = rounds;
+        this.filterOptions = filterOptions;
     }
 
-    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore) {
+    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<FilterOption> filterOptions) {
         this.catchGameId = catchGameId;
         this.currentRoundNumber = currentRoundNumber;
         this.finishScore = finishScore;
+        this.filterOptions = filterOptions;
     }
 
     public void updateNewRound(Round round) {

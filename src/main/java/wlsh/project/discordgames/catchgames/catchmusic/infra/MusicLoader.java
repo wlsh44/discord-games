@@ -7,15 +7,13 @@ import wlsh.project.discordgames.catchgames.catchmusic.domain.Album;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.Artist;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchgames.catchmusic.domain.Music;
-import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.MbcFM4UCrawler;
+import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.CrawlerFactory;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.MusicInfoCache;
+import wlsh.project.discordgames.catchgames.catchmusic.infra.crawler.RadioCrawler;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.spotify.MusicInfo;
 import wlsh.project.discordgames.catchgames.catchmusic.infra.spotify.SpotifySearchService;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Slf4j
 @Component
@@ -23,10 +21,10 @@ import java.util.concurrent.Executors;
 public class MusicLoader {
 
     private final MusicInfoCache musicCache;
-    private final MbcFM4UCrawler crawler;
+    private final CrawlerFactory crawlerFactory;
     private final SpotifySearchService spotifySearchService;
 
-    public Music loadMusic(CatchMusic catchMusic, int popularity) {
+    public Music loadMusic(CatchMusic catchMusic) {
         if (catchMusic.getCurrentRoundNumber() == 0) {
             musicCache.clear();
         }
@@ -34,19 +32,21 @@ public class MusicLoader {
             return musicCache.get();
         }
         while (musicCache.size() <= 2) {
+            RadioCrawler crawler = crawlerFactory.getRadioCrawler(catchMusic.getRadio());
             List<Music> musicList = crawler.crawl(catchMusic.getRadio());
             musicList.parallelStream()
                     .map(music -> {
                         try {
                             MusicInfo musicInfo = spotifySearchService.searchMusicInfo(music);
                             log.info("노래: {}, 가수: {}, 유명도: {}, 발매일: {}", music.name(), music.artist(), musicInfo.popularity(), musicInfo.releaseDate());
-                            return Music.of(music.name(), music.secondName(), new Artist(musicInfo.artistName(), musicInfo.artistUrl()), new Album(musicInfo.albumName(), musicInfo.albumUrl()), musicInfo.popularity(), musicInfo.releaseDate());
+                            return Music.of(musicInfo.musicName(), music.secondName(), new Artist(musicInfo.artistName(), musicInfo.artistUrl()), new Album(musicInfo.albumName(), musicInfo.albumUrl()), musicInfo.popularity(), musicInfo.releaseDate());
                         } catch (Exception e) {
                             log.info("노래: {}, 가수: {}, 유명도: {}, 발매일: {}", music.name(), music.artist(), null, null);
                             return music;
                         }
                     })
-                    .filter(music -> music.popularity() >= popularity)
+                    .filter(music -> catchMusic.getFilterOptions().stream()
+                            .allMatch(filterOption -> filterOption.doFilter(music)))
                     .forEach(musicCache::save);
         }
         return musicCache.get();
