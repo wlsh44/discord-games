@@ -1,4 +1,4 @@
-package wlsh.project.discordgames.common.poll.ui;
+package wlsh.project.discordgames.catchmusic.ui;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +21,16 @@ import javax.annotation.Nonnull;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class VoteDispatcher extends ListenerAdapter {
+public class CatchMusicVoteDispatcher extends ListenerAdapter {
 
     private final PollRepository pollRepository;
     private final CatchMusicVoteUseCase catchMusicVoteUseCase;
 
     @Override
     public void onMessagePollVoteAdd(@Nonnull MessagePollVoteAddEvent event) {
+        if (!"캐치뮤직".equals(event.getChannel().getName())) {
+            return;
+        }
         CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannel().getId());
         VoteResult voteResult = catchMusicVoteUseCase.vote(event.getUserId(), catchGameId, event.getMessageId());
         switch (voteResult.pollType()) {
@@ -41,6 +44,9 @@ public class VoteDispatcher extends ListenerAdapter {
 
     @Override
     public void onMessagePollVoteRemove(@Nonnull MessagePollVoteRemoveEvent event) {
+        if (!"캐치뮤직".equals(event.getChannel().getName())) {
+            return;
+        }
         Poll poll = pollRepository.findById(event.getMessageId())
                 .orElseThrow(() -> new RuntimeException("없음"));
         Voter voter = new Voter(event.getUserId());
@@ -49,6 +55,9 @@ public class VoteDispatcher extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
+        if (!"캐치뮤직".equals(event.getChannel().getName())) {
+            return;
+        }
         if (event.getMessage().getPoll() == null) {
             return;
         }

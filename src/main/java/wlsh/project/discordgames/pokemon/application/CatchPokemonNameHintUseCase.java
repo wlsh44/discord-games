@@ -13,7 +13,7 @@ import wlsh.project.discordgames.pokemon.domain.CatchPokemonRound;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class CatchPokemonNameHintService {
+public class CatchPokemonNameHintUseCase {
 
     private final CatchPokemonRepository catchPokemonRepository;
     private final AnswerHintService answerHintService;

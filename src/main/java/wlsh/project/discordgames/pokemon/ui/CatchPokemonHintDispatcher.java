@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.discord.command.ICommand;
-import wlsh.project.discordgames.pokemon.application.CatchPokemonNameHintService;
+import wlsh.project.discordgames.pokemon.application.CatchPokemonNameHintUseCase;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 @RequiredArgsConstructor
 public class CatchPokemonHintDispatcher implements ICommand {
 
-    private final CatchPokemonNameHintService catchPokemonNameHintService;
+    private final CatchPokemonNameHintUseCase catchPokemonNameHintUseCase;
 
     @Override
     public String getName() {
@@ -46,7 +46,7 @@ public class CatchPokemonHintDispatcher implements ICommand {
         }
 //        String hint = requireNonNull(event.getOption("pohint")).getAsString();
         CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannelId());
-        TitleHintResult musicNameHint = catchPokemonNameHintService.getAnswerHint(catchGameId);
+        TitleHintResult musicNameHint = catchPokemonNameHintUseCase.getAnswerHint(catchGameId);
         String totalHint = musicNameHint.title() + "(총 글자 수: %d)".formatted(
                 musicNameHint.length()
 //                musicNameHint.hangul() ? "✅" : "❌",

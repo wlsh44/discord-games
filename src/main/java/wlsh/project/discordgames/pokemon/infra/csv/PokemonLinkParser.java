@@ -1,6 +1,6 @@
 package wlsh.project.discordgames.pokemon.infra.csv;
 
-import wlsh.project.discordgames.pokemon.PokemonLink;
+import wlsh.project.discordgames.pokemon.infra.crawl.PokemonLink;
 
 public class PokemonLinkParser implements CSVParser<PokemonLink> {
 

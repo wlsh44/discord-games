@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.discord.ChannelRepository;
 import wlsh.project.discordgames.discord.command.ICommand;
-import wlsh.project.discordgames.pokemon.application.NewCatchPokemonService;
+import wlsh.project.discordgames.pokemon.application.NewCatchPokemonUseCase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
 @RequiredArgsConstructor
 public class CatchPokemonNewGameDispatcher implements ICommand {
 
-    private final NewCatchPokemonService newCatchPokemonService;
+    private final NewCatchPokemonUseCase newCatchPokemonUseCase;
     private final CatchPokemonCurrentRoundHandler catchPokemonCurrentRoundHandler;
     private final ChannelRepository channelRepository;
 
@@ -61,7 +61,7 @@ public class CatchPokemonNewGameDispatcher implements ICommand {
         int round = requireNonNull(event.getOption("finish-score")).getAsInt();
 
         CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannelId());
-        newCatchPokemonService.newCatchPokemon(catchGameId, excludeList, round);
+        newCatchPokemonUseCase.newCatchPokemon(catchGameId, excludeList, round);
         event.reply("게임이 시작됩니다.").queue();
         catchPokemonCurrentRoundHandler.show(catchGameId, event.getChannel());
     }

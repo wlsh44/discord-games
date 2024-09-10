@@ -1,13 +1,13 @@
-package wlsh.project.discordgames.catchmusic.ui;
+package wlsh.project.discordgames.common.poll.ui;
 
 import lombok.RequiredArgsConstructor;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.utils.messages.MessagePollData;
 import org.springframework.stereotype.Component;
+import wlsh.project.discordgames.catchmusic.ui.ChannelValidator;
 import wlsh.project.discordgames.discord.command.ICommand;
 
 import java.time.Duration;
@@ -16,9 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class CatchMusicSkipDispatcher implements ICommand {
-
-//    private final SkipService skipService;
+public class SkipDispatcher implements ICommand {
 
     @Override
     public String getName() {
@@ -27,7 +25,7 @@ public class CatchMusicSkipDispatcher implements ICommand {
 
     @Override
     public String getDescription() {
-        return "Create New Game";
+        return "스킵";
     }
 
     @Override
@@ -37,10 +35,14 @@ public class CatchMusicSkipDispatcher implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        ChannelValidator.checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
+        if ("캐치뮤직".equals(event.getChannel().getName())) {
+            ChannelValidator.checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
+        } else if (!"캐치포켓몬".equals(event.getChannel().getName())) {
+            return;
+        }
 
         MessageChannelUnion channel = event.getChannel();
-        Message message = channel.sendMessage("노래 스킵 투표가 생성되었습니다.")
+        channel.sendMessage("스킵 투표가 생성되었습니다.")
                 .setPoll(
                         MessagePollData.builder("스킵 투표")
                                 .addAnswer("찬성", Emoji.fromUnicode("👍"))
@@ -48,9 +50,5 @@ public class CatchMusicSkipDispatcher implements ICommand {
                                 .setDuration(Duration.ofHours(1))
                                 .build())
                 .complete();
-//        message.pin().queue();
-//        MessagePoll poll = message.getPoll();
-//        SkipResponse skip = skipService.skip(event.getGuild().getId());
-//        event.reply("스킵되었습니다. 정답 %s - %s".formatted(skip.musicName(), skip.artist())).queue();
     }
 }

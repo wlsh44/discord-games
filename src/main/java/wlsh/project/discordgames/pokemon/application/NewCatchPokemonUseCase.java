@@ -6,22 +6,15 @@ import org.springframework.stereotype.Service;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.pokemon.domain.FilterOption;
 import wlsh.project.discordgames.pokemon.domain.GenerationFilter;
-import wlsh.project.discordgames.pokemon.infra.csv.CSVService;
-import wlsh.project.discordgames.pokemon.infra.csv.PokemonParser;
 import wlsh.project.discordgames.pokemon.domain.CatchPokemon;
 import wlsh.project.discordgames.pokemon.infra.CatchPokemonRepository;
-import wlsh.project.discordgames.pokemon.domain.Pokemon;
-import wlsh.project.discordgames.pokemon.domain.CatchPokemonRound;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Stream;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NewCatchPokemonService {
+public class NewCatchPokemonUseCase {
 
     private final CatchPokemonRepository catchPokemonRepository;
     private final AddCatchPokemonRoundService addCatchPokemonRoundService;

@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.StringUtils;
+import wlsh.project.discordgames.pokemon.infra.crawl.LinkCrawler;
+import wlsh.project.discordgames.pokemon.infra.crawl.PokemonLink;
 import wlsh.project.discordgames.pokemon.infra.csv.CSVService;
 import wlsh.project.discordgames.pokemon.infra.csv.PokemonFormatter;
 import wlsh.project.discordgames.pokemon.infra.csv.PokemonLinkParser;
