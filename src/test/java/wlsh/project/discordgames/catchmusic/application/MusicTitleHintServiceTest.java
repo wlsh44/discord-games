@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MusicNameHintServiceTest {
+class MusicTitleHintServiceTest {
 
     @Test
     @DisplayName("")

@@ -6,9 +6,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.StringUtils;
-import wlsh.project.discordgames.pokemon.csv.CSVService;
-import wlsh.project.discordgames.pokemon.csv.PokemonFormatter;
-import wlsh.project.discordgames.pokemon.csv.PokemonLinkParser;
+import wlsh.project.discordgames.pokemon.infra.csv.CSVService;
+import wlsh.project.discordgames.pokemon.infra.csv.PokemonFormatter;
+import wlsh.project.discordgames.pokemon.infra.csv.PokemonLinkParser;
 import wlsh.project.discordgames.pokemon.domain.Pokemon;
 
 import java.io.IOException;

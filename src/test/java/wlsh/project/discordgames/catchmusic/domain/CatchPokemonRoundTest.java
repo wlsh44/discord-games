@@ -3,7 +3,7 @@ package wlsh.project.discordgames.catchmusic.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class Round2Test {
+class CatchPokemonRoundTest {
 
 
     @Test

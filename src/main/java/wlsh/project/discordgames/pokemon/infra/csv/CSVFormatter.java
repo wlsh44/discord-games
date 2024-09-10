@@ -1,4 +1,4 @@
-package wlsh.project.discordgames.pokemon.csv;
+package wlsh.project.discordgames.pokemon.infra.csv;
 
 import java.util.List;
 

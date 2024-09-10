@@ -4,8 +4,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import wlsh.project.discordgames.pokemon.csv.CSVService;
-import wlsh.project.discordgames.pokemon.csv.PokemonLinkFormatter;
+import wlsh.project.discordgames.pokemon.infra.csv.CSVService;
+import wlsh.project.discordgames.pokemon.infra.csv.PokemonLinkFormatter;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

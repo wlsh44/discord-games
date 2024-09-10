@@ -6,9 +6,9 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
+import wlsh.project.discordgames.discord.ChannelRepository;
 import wlsh.project.discordgames.discord.command.ICommand;
-import wlsh.project.discordgames.pokemon.application.CatchPokemonCurrentRoundService;
 import wlsh.project.discordgames.pokemon.application.NewCatchPokemonService;
 
 import java.util.Arrays;
@@ -22,7 +22,8 @@ import static java.util.Objects.requireNonNull;
 public class CatchPokemonNewGameDispatcher implements ICommand {
 
     private final NewCatchPokemonService newCatchPokemonService;
-    private final CatchPokemonCurrentRoundService catchPokemonCurrentRoundService;
+    private final CatchPokemonCurrentRoundHandler catchPokemonCurrentRoundHandler;
+    private final ChannelRepository channelRepository;
 
     @Override
     public String getName() {
@@ -44,10 +45,10 @@ public class CatchPokemonNewGameDispatcher implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-//        checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
         if (!event.getChannel().getName().equals("캐치포켓몬")) {
             throw new RuntimeException("캐치포켓몬 명령어입니다.");
         }
+        channelRepository.save(event.getChannelId(), event.getChannel());
 
         OptionMapping exclude = event.getOption("exclude");
         List<Integer> excludeList = List.of();
@@ -59,9 +60,9 @@ public class CatchPokemonNewGameDispatcher implements ICommand {
         }
         int round = requireNonNull(event.getOption("finish-score")).getAsInt();
 
-//        newCatchMusicService.newCatchMusic(event.getGuild().getId(), Radio.valueOf(tag), round);
-        newCatchPokemonService.newCatchPokemon(event.getGuild().getId(), excludeList, round);
+        CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannelId());
+        newCatchPokemonService.newCatchPokemon(catchGameId, excludeList, round);
         event.reply("게임이 시작됩니다.").queue();
-        catchPokemonCurrentRoundService.show(event.getGuild().getId(), event.getChannel());
+        catchPokemonCurrentRoundHandler.show(catchGameId, event.getChannel());
     }
 }

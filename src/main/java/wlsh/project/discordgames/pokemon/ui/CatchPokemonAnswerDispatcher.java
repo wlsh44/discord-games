@@ -2,20 +2,31 @@ package wlsh.project.discordgames.pokemon.ui;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.stereotype.Component;
-import wlsh.project.discordgames.pokemon.application.CatchPokemonAnswerService;
-import wlsh.project.discordgames.pokemon.domain.Player;
+import wlsh.project.discordgames.catchmusic.application.dto.CatchMusicAnswerResult;
+import wlsh.project.discordgames.common.catchgames.application.dto.CatchGameStatus;
+import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
+import wlsh.project.discordgames.common.catchgames.domain.Player;
+import wlsh.project.discordgames.common.ui.StatusHandler;
+import wlsh.project.discordgames.discord.util.DiscordMessageHandler;
+import wlsh.project.discordgames.pokemon.application.CatchPokemonAnswerUseCase;
+import wlsh.project.discordgames.pokemon.application.dto.CatchPokemonAnswerResult;
+import wlsh.project.discordgames.pokemon.domain.Pokemon;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class CatchPokemonAnswerDispatcher extends ListenerAdapter {
 
-    private final CatchPokemonAnswerService catchPokemonAnswerService;
+    private final CatchPokemonAnswerUseCase catchPokemonAnswerUseCase;
+    private final StatusHandler statusHandler;
+    private final CatchPokemonCurrentRoundHandler catchPokemonCurrentRoundHandler;
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -26,19 +37,40 @@ public class CatchPokemonAnswerDispatcher extends ListenerAdapter {
             return;
         }
         try {
-//            checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
             if (!event.getChannel().getName().equals("캐치포켓몬")) {
                 return;
             }
 
-            catchPokemonAnswerService.answer(
-                    event.getGuild().getId(),
-                    new Player(author.getId(), author.getName(), message.getContentDisplay()),
-                    event.getChannel()
+            CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannel().getId());
+            CatchPokemonAnswerResult answer = catchPokemonAnswerUseCase.answer(
+                    catchGameId,
+                    new Player(author.getId(), author.getName(), message.getContentDisplay())
             );
+            switch (answer.status()) {
+                case CORRECT -> {
+                    var content = (CatchPokemonAnswerResult.CorrectContent) answer.content();
+                    sendAnswerInfo(event, author.getName(), content.pokemon());
+                    statusHandler.sendStatus(event, content.status());
+                    catchPokemonCurrentRoundHandler.show(catchGameId, event.getChannel());
+                }
+                case FINISH -> {
+                    var content = (CatchPokemonAnswerResult.FinishContent) answer.content();
+                    statusHandler.sendStatus(event, content.status());
+                    event.getChannel().sendMessage("끝").queue();
+                }
+            }
         } catch (Exception e) {
             log.error("", e);
             event.getChannel().sendMessage(e.getMessage()).queue();
         }
+    }
+
+    private void sendAnswerInfo(MessageReceivedEvent event, String name, Pokemon pokemon) {
+        MessageEmbed embed = new EmbedBuilder()
+                .setDescription("**정답** : `%s`\n".formatted(name))
+                .appendDescription("`%s(%s)`\n".formatted(pokemon.getKo(), pokemon.getEn()))
+                .appendDescription("`%d 세대`\n".formatted(pokemon.getGeneration()))
+                .build();
+        event.getChannel().sendMessageEmbeds(embed).queue();
     }
 }

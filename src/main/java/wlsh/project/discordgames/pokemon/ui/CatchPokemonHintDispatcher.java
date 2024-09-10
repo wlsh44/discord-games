@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
+import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.discord.command.ICommand;
 import wlsh.project.discordgames.pokemon.application.CatchPokemonNameHintService;
 
@@ -44,7 +45,8 @@ public class CatchPokemonHintDispatcher implements ICommand {
             return;
         }
 //        String hint = requireNonNull(event.getOption("pohint")).getAsString();
-        TitleHintResult musicNameHint = catchPokemonNameHintService.getNameHint(event.getGuild().getId());
+        CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannelId());
+        TitleHintResult musicNameHint = catchPokemonNameHintService.getAnswerHint(catchGameId);
         String totalHint = musicNameHint.title() + "(총 글자 수: %d)".formatted(
                 musicNameHint.length()
 //                musicNameHint.hangul() ? "✅" : "❌",

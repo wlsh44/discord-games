@@ -17,21 +17,18 @@ public abstract class CatchGame {
     protected int finishScore;
 
     protected List<Round> rounds = new ArrayList<>();
-    private List<FilterOption> filterOptions = new ArrayList<>();
 
-    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<Round> rounds, List<FilterOption> filterOptions) {
+    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<Round> rounds) {
         this.catchGameId = catchGameId;
         this.currentRoundNumber = currentRoundNumber;
         this.finishScore = finishScore;
         this.rounds = rounds;
-        this.filterOptions = filterOptions;
     }
 
-    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore, List<FilterOption> filterOptions) {
+    public CatchGame(CatchGameId catchGameId, int currentRoundNumber, int finishScore) {
         this.catchGameId = catchGameId;
         this.currentRoundNumber = currentRoundNumber;
         this.finishScore = finishScore;
-        this.filterOptions = filterOptions;
     }
 
     public void updateNewRound(Round round) {

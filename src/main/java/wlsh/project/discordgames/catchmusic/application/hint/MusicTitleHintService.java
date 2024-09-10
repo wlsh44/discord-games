@@ -7,6 +7,7 @@ import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult
 import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusicRepository;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusicRound;
+import wlsh.project.discordgames.common.catchgames.application.AnswerHintService;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 
 import java.util.HashMap;
@@ -14,21 +15,15 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class MusicNameHintService {
+public class MusicTitleHintService {
 
     private final CatchMusicRepository catchMusicRepository;
-    private final Map<CatchGameId, TitleHintContext> contextMap = new HashMap<>();
+    private final AnswerHintService answerHintService;
 
     public TitleHintResult getMusicNameHint(CatchGameId catchGameId) {
         CatchMusic catchMusic = catchMusicRepository.findByCatchGameId(catchGameId)
                 .orElseThrow(() -> new RuntimeException("없음"));
         CatchMusicRound round = catchMusic.getCurrentRound();
-        String answer = round.getAnswer();
-        TitleHintContext context = contextMap.getOrDefault(catchGameId, new TitleHintContext(answer));
-        if (!context.isCurrentHintContext(answer)) {
-            context = new TitleHintContext(answer);
-        }
-        contextMap.put(catchGameId, context);
-        return context.getHint();
+        return answerHintService.getAnswerHint(catchGameId, round);
     }
 }

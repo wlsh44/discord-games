@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.catchmusic.application.hint.AlbumHintService;
 import wlsh.project.discordgames.catchmusic.application.hint.ArtistHintService;
-import wlsh.project.discordgames.catchmusic.application.hint.MusicNameHintService;
+import wlsh.project.discordgames.catchmusic.application.hint.MusicTitleHintService;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.AlbumHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.ArtistHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
@@ -24,7 +24,7 @@ import static java.util.Objects.requireNonNull;
 @RequiredArgsConstructor
 public class CatchMusicHintDispatcher implements ICommand {
 
-    private final MusicNameHintService musicNameHintService;
+    private final MusicTitleHintService musicTitleHintService;
     private final AlbumHintService albumHintService;
     private final ArtistHintService artistHintService;
 
@@ -77,7 +77,7 @@ public class CatchMusicHintDispatcher implements ICommand {
                 event.replyEmbeds(embed).queue();
             }
             case "title" -> {
-                TitleHintResult musicNameHint = musicNameHintService.getMusicNameHint(catchGameId);
+                TitleHintResult musicNameHint = musicTitleHintService.getMusicNameHint(catchGameId);
                 String totalHint = musicNameHint.title() + " (총 글자 수: %d 한글: %s 영어: %s 특수 문자: %s)".formatted(
                         musicNameHint.length(),
                         musicNameHint.hangul() ? "✅" : "❌",

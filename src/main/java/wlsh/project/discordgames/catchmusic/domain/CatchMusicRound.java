@@ -1,6 +1,7 @@
 package wlsh.project.discordgames.catchmusic.domain;
 
 import lombok.Getter;
+import wlsh.project.discordgames.common.catchgames.domain.Answer;
 import wlsh.project.discordgames.common.catchgames.domain.Round;
 
 @Getter
@@ -9,7 +10,7 @@ public class CatchMusicRound extends Round {
     private Music music;
 
     public CatchMusicRound(int roundNumber, Music music) {
-        super(roundNumber);
+        super(roundNumber, makeAnswer(music));
         this.music = music;
     }
 
@@ -17,8 +18,7 @@ public class CatchMusicRound extends Round {
         return new CatchMusicRound(1, music);
     }
 
-    @Override
-    public String getAnswer() {
+    public static Answer makeAnswer(Music music) {
         String name = music.name()
                 .toLowerCase();
         String regex = "\\([^()]*\\)";
@@ -26,7 +26,7 @@ public class CatchMusicRound extends Round {
         while (name.matches(".*\\([^()]*\\).*")) {
             name = name.replaceAll(regex, "").trim();
         }
-        return name.trim();
+        return new Answer(name.trim(), music.secondName().trim());
     }
 
     @Override

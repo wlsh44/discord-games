@@ -1,37 +1,34 @@
 package wlsh.project.discordgames.catchmusic.application;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-import wlsh.project.discordgames.catchmusic.application.dto.AnswerResult;
+import wlsh.project.discordgames.catchmusic.application.dto.CatchMusicAnswerResult;
 import wlsh.project.discordgames.catchmusic.application.dto.CatchMusicStatus;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusicRepository;
 import wlsh.project.discordgames.catchmusic.domain.Music;
-import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
+import wlsh.project.discordgames.common.catchgames.application.CatchGameStatusService;
+import wlsh.project.discordgames.common.catchgames.application.dto.CatchGameStatus;
 
 @Service
 @RequiredArgsConstructor
 public class CatchMusicAnswerCorrectService {
 
-    private final ApplicationEventPublisher publisher;
     private final CatchMusicRepository catchMusicRepository;
     private final AddCatchMusicRoundService addCatchMusicRoundService;
-    private final CatchMusicStatusService catchMusicStatusService;
+    private final CatchGameStatusService catchGameStatusService;
 
-    public AnswerResult handleAnswerCorrect(CatchMusic catchMusic) {
-        CatchGameId catchGameId = catchMusic.getCatchGameId();
-
-        CatchMusicStatus status = catchMusicStatusService.getStatus(catchMusic);
+    public CatchMusicAnswerResult handleAnswerCorrect(CatchMusic catchMusic) {
+        CatchGameStatus status = catchGameStatusService.getStatus(catchMusic);
 
         if (catchMusic.isFinished()) {
-            catchMusicRepository.delete(catchGameId);
-            return AnswerResult.finish(status);
+            catchMusicRepository.delete(catchMusic.getCatchGameId());
+            return CatchMusicAnswerResult.finish(status);
         } else {
             Music currentMusic = catchMusic.getCurrentRound().getMusic();
             addCatchMusicRoundService.addRound(catchMusic);
             Music nextMusic = catchMusic.getCurrentRound().getMusic();
-            return AnswerResult.correct(currentMusic, nextMusic, status);
+            return CatchMusicAnswerResult.correct(currentMusic, nextMusic, status);
         }
     }
 }
