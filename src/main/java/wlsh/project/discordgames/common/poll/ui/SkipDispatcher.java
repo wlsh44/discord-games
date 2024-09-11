@@ -35,9 +35,10 @@ public class SkipDispatcher implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if ("캐치뮤직".equals(event.getChannel().getName())) {
+        String channelName = event.getChannel().getName();
+        if ("캐치뮤직".equals(channelName)) {
             ChannelValidator.checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
-        } else if (!"캐치포켓몬".equals(event.getChannel().getName())) {
+        } else if (!"캐치포켓몬".equals(channelName) && !"캐치포스킬".equals(channelName)) {
             return;
         }
 
