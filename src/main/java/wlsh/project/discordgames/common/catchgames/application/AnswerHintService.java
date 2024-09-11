@@ -5,7 +5,6 @@ import wlsh.project.discordgames.catchmusic.application.hint.context.TitleHintCo
 import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.common.catchgames.domain.Round;
-import wlsh.project.discordgames.pokemon.domain.CatchPokemonRound;
 
 import java.util.HashMap;
 import java.util.Map;

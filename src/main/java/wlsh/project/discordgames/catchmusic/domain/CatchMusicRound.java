@@ -4,6 +4,9 @@ import lombok.Getter;
 import wlsh.project.discordgames.common.catchgames.domain.Answer;
 import wlsh.project.discordgames.common.catchgames.domain.Round;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Getter
 public class CatchMusicRound extends Round {
 
@@ -26,7 +29,11 @@ public class CatchMusicRound extends Round {
         while (name.matches(".*\\([^()]*\\).*")) {
             name = name.replaceAll(regex, "").trim();
         }
-        return new Answer(name.trim(), music.secondName().trim());
+        String second = "";
+        if (Objects.nonNull(music.secondName())) {
+            second = music.secondName().trim();
+        }
+        return new Answer(name.trim(), second);
     }
 
     @Override
