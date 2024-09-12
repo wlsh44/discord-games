@@ -2,10 +2,6 @@ package wlsh.project.discordgames.catchposkill.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemon;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemonRound;
-import wlsh.project.discordgames.catchpokemon.domain.Pokemon;
-import wlsh.project.discordgames.catchpokemon.infra.PokemonLoader;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkill;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkillRound;
 import wlsh.project.discordgames.catchposkill.domain.PoSkill;

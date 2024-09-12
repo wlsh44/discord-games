@@ -1,8 +1,6 @@
 package wlsh.project.discordgames.common.catchgames.application;
 
 import org.springframework.stereotype.Component;
-import wlsh.project.discordgames.catchmusic.application.dto.CatchMusicStatus;
-import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.common.catchgames.application.dto.CatchGameStatus;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGame;
 import wlsh.project.discordgames.common.catchgames.domain.Round;

@@ -1,7 +1,6 @@
 package wlsh.project.discordgames.catchposkill.infra;
 
 import org.springframework.stereotype.Repository;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemon;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkill;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 

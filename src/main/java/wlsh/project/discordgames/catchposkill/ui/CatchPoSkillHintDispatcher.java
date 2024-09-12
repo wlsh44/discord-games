@@ -38,18 +38,13 @@ public class CatchPoSkillHintDispatcher implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-//        checkValidChannelState(event.getMember(), event.getGuild(), event.getChannel());
         if (!event.getChannel().getName().equals("캐치포스킬")) {
             return;
         }
-//        String hint = requireNonNull(event.getOption("pohint")).getAsString();
         CatchGameId catchGameId = new CatchGameId(event.getGuild().getId(), event.getChannelId());
         TitleHintResult musicNameHint = catchPoSkillNameHintUseCase.getAnswerHint(catchGameId);
         String totalHint = musicNameHint.title() + "(총 글자 수: %d)".formatted(
                 musicNameHint.length()
-//                musicNameHint.hangul() ? "✅" : "❌",
-//                musicNameHint.english() ? "✅" : "❌",
-//                musicNameHint.specialCharacter() ? "✅" : "❌"
         );
         MessageEmbed embed = new EmbedBuilder()
                 .setTitle("제목 힌트")

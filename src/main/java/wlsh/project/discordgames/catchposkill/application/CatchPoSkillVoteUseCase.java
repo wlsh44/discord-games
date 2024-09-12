@@ -3,7 +3,6 @@ package wlsh.project.discordgames.catchposkill.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import wlsh.project.discordgames.catchmusic.application.dto.VoteResult;
-import wlsh.project.discordgames.catchpokemon.application.dto.CatchPokemonSkipResponse;
 import wlsh.project.discordgames.catchposkill.application.dto.CatchPoSkillSkipResponse;
 import wlsh.project.discordgames.catchposkill.infra.CatchPoSkillRepository;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;

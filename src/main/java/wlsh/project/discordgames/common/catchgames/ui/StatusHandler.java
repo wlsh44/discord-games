@@ -1,4 +1,4 @@
-package wlsh.project.discordgames.common.ui;
+package wlsh.project.discordgames.common.catchgames.ui;
 
 import lombok.RequiredArgsConstructor;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

@@ -33,18 +33,6 @@ public abstract class Round {
         return false;
     }
 
-//    public String getAnswer() {
-//        String name = "music"
-//                .toLowerCase();
-//        String regex = "\\([^()]*\\)"; // 이 정규식은 중첩되지 않은 괄호만 제거합니다.
-//
-//        // 중첩된 괄호도 처리하기 위해 루프를 사용하여 반복적으로 제거
-//        while (name.matches(".*\\([^()]*\\).*")) {
-//            name = name.replaceAll(regex, "").trim();
-//        }
-//        return name.trim();
-//    }
-
     public boolean isFinished() {
         return Objects.nonNull(answerer);
     }

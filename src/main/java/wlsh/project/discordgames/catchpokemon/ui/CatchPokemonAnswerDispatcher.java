@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.stereotype.Component;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.common.catchgames.domain.Player;
-import wlsh.project.discordgames.common.ui.StatusHandler;
+import wlsh.project.discordgames.common.catchgames.ui.StatusHandler;
 import wlsh.project.discordgames.catchpokemon.application.CatchPokemonAnswerUseCase;
 import wlsh.project.discordgames.catchpokemon.application.dto.CatchPokemonAnswerResult;
 import wlsh.project.discordgames.catchpokemon.domain.Pokemon;

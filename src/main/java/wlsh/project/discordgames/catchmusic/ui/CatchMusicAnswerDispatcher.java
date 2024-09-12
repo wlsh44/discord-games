@@ -15,7 +15,7 @@ import wlsh.project.discordgames.catchmusic.application.PlayMusicEvent;
 import wlsh.project.discordgames.catchmusic.application.dto.CatchMusicAnswerResult;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.common.catchgames.domain.Player;
-import wlsh.project.discordgames.common.ui.StatusHandler;
+import wlsh.project.discordgames.common.catchgames.ui.StatusHandler;
 import wlsh.project.discordgames.discord.AudioPlayerService;
 import wlsh.project.discordgames.discord.util.DiscordMessageHandler;
 

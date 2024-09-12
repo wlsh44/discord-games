@@ -1,7 +1,6 @@
 package wlsh.project.discordgames.common.catchgames.domain;
 
 import lombok.Getter;
-import wlsh.project.discordgames.catchmusic.domain.FilterOption;
 
 import java.util.ArrayList;
 import java.util.List;

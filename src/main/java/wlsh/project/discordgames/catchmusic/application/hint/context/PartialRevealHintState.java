@@ -13,8 +13,6 @@ import java.util.Set;
 public class PartialRevealHintState implements TitleHintState {
     @Override
     public TitleHintResult getHint(TitleHintContext context, Hint hint) {
-//        StringBuilder hint = new StringBuilder();
-//        String answer = answerInfo.answer();
         int hintLength = hint.getLength();
         int revealCount = hintLength / 3;
         if (revealCount == 0) {
@@ -34,20 +32,6 @@ public class PartialRevealHintState implements TitleHintState {
             hintCharacter.reveal();
             revealedIndexSet.add(num);
         }
-
-//        for (int i = 0; i < answer.length(); i++) {
-//            char ch = answer.charAt(i);
-//            if (revealIndexSet.contains(i)) {
-//                hint.append(ch);
-//            } else if (Character.isWhitespace(ch)) {
-//                hint.append("  ");
-//            } else {
-//                hint.append("⚪️");
-//            }
-//        }
-
-//        answerInfo.changeHint(hint.toString());
-
         return TitleHintResult.of(hint);
     }
 }

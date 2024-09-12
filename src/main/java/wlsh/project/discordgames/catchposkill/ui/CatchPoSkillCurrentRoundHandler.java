@@ -5,8 +5,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import org.springframework.stereotype.Service;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemon;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemonRound;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkill;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkillRound;
 import wlsh.project.discordgames.catchposkill.domain.PoSkill;

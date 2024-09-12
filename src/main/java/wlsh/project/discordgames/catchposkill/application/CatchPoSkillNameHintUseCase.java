@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemon;
-import wlsh.project.discordgames.catchpokemon.domain.CatchPokemonRound;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkill;
 import wlsh.project.discordgames.catchposkill.domain.CatchPoSkillRound;
 import wlsh.project.discordgames.catchposkill.infra.CatchPoSkillRepository;

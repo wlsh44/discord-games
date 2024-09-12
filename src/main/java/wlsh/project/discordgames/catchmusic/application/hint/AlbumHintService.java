@@ -15,13 +15,11 @@ import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 public class AlbumHintService {
 
     private final CatchMusicRepository catchMusicRepository;
-    private final SpotifySearchService spotifySearchService;
 
     public AlbumHintResult getAlbumHint(CatchGameId catchGameId) {
         CatchMusic catchMusic = catchMusicRepository.findByCatchGameId(catchGameId)
                 .orElseThrow(() -> new RuntimeException("없음"));
         Music music = catchMusic.getCurrentRound().getMusic();
-//        MusicInfo musicInfo = spotifySearchService.searchMusicInfo(music);
         Album album = music.album();
         return new AlbumHintResult(album.url(), album.name(), music.releaseDate());
     }

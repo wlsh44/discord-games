@@ -17,13 +17,11 @@ import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 public class ArtistHintService {
 
     private final CatchMusicRepository catchMusicRepository;
-    private final SpotifySearchService spotifySearchService;
 
     public ArtistHintResult getArtistHint(CatchGameId catchGameId) {
         CatchMusic catchMusic = catchMusicRepository.findByCatchGameId(catchGameId)
                 .orElseThrow(() -> new RuntimeException("없음"));
         Music music = catchMusic.getCurrentRound().getMusic();
-//        ArtistInfo artistInfo = spotifySearchService.searchArtistInfo(music.artist());
         Artist artist = music.artist();
         return new ArtistHintResult(artist.name(), artist.url());
     }

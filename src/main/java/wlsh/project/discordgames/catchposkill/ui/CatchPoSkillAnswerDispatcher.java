@@ -14,7 +14,7 @@ import wlsh.project.discordgames.catchposkill.application.dto.CatchPoSkillAnswer
 import wlsh.project.discordgames.catchposkill.domain.PoSkill;
 import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 import wlsh.project.discordgames.common.catchgames.domain.Player;
-import wlsh.project.discordgames.common.ui.StatusHandler;
+import wlsh.project.discordgames.common.catchgames.ui.StatusHandler;
 
 @Slf4j
 @Component
