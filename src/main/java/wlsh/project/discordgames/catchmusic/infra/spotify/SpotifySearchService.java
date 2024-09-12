@@ -50,13 +50,12 @@ public class SpotifySearchService {
                 .onStatus(status -> status.value() != HttpStatus.OK.value(),
                         (request, response) -> handleError(artistName, response))
                 .body(ArtistInfoResponse.class);
-        System.out.println("artistResponse = " + res);
         ArtistInfoResponse.Artist artist = res.artists().items().get(0);
         return new ArtistInfo(artistName, artist.id(), artist.images().get(0).url());
     }
 
     public MusicInfo searchMusicInfo(Music music) {
-        ArtistInfo artistInfo = searchArtistInfo(music.artist());
+        ArtistInfo artistInfo = searchArtistInfo(music.artist().name());
         MusicSearchResponse res = restClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/v1/search")
                         .queryParam("q", music.name())
@@ -73,20 +72,22 @@ public class SpotifySearchService {
         if (items.isEmpty()) {
             throw new RuntimeException("앨범 정보를 찾지 못했습니다.");
         }
-        MusicSearchResponse.Album album = items.stream()
+        MusicSearchResponse.Item mostRelevantItem = items.stream()
                 .filter(item -> item.album().artists().get(0).id().equals(artistInfo.spotifyId()))
                 .findFirst()
                 .orElseGet(() -> {
-                    if (items.get(0).album().artists().get(0).name().equals(music.artist())) {
+                    String name = items.get(0).album().artists().get(0).name().toLowerCase();
+                    String name2 = music.artist().name().toLowerCase();
+                    if (name.equals(name2)) {
                         return items.get(0);
                     }
                     throw new RuntimeException("앨범 정보를 찾지 못했습니다.");
-                })
-                .album();
+                });
+        MusicSearchResponse.Album album = mostRelevantItem.album();
         String albumImage = album
                 .images()
                 .get(0).url();
-        return new MusicInfo(music.name(), albumImage, album.name(), album.releaseDate());
+        return new MusicInfo(mostRelevantItem.name(), artistInfo.artistName(), artistInfo.url(), albumImage, album.name(), album.releaseDate(), mostRelevantItem.popularity());
     }
 
     private void handleError(String data, ClientHttpResponse response) throws IOException {

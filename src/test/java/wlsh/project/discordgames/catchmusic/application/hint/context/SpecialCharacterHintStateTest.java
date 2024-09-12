@@ -1,8 +1,8 @@
 package wlsh.project.discordgames.catchmusic.application.hint.context;
 
 import org.junit.jupiter.api.Test;
-import wlsh.project.discordgames.catchmusic.application.TitleHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.Hint;
+import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 
 import static org.mockito.Mockito.mock;
 

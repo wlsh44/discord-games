@@ -11,10 +11,6 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.stereotype.Component;
-import wlsh.project.discordgames.catchmusic.application.AnswerService;
-import wlsh.project.discordgames.catchmusic.application.PlayService;
-import wlsh.project.discordgames.catchmusic.application.dto.AnswerResult;
-import wlsh.project.discordgames.catchmusic.domain.Player;
 
 import static java.util.Objects.requireNonNull;
 
@@ -38,6 +34,6 @@ public class MessageEventListener extends ListenerAdapter {
 
         Guild guild = event.getGuild();
         guildRepository.save(guild.getId(), guild);
-        channelRepository.save(guild.getId(), message.getChannel());
+        channelRepository.save(event.getChannel().getId(), message.getChannel());
     }
 }

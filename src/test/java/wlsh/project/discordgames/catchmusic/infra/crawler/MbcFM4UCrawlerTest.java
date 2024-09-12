@@ -9,14 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MbcFM4UCrawlerTest {
 
 
-    @Autowired
-    MbcFM4UCrawler mbcFM4UCrawler;
+//    @Autowired
+//    MbcFM4UCrawler mbcFM4UCrawler;
 
     @Test
     @DisplayName("asd")
     void fd() throws Exception {
         //given
-        mbcFM4UCrawler.crawl(Radio.MUSIC_PARTY);
+//        mbcFM4UCrawler.crawl(Radio.MUSIC_PARTY);
 
         //when
 

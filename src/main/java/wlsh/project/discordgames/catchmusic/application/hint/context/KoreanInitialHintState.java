@@ -1,11 +1,11 @@
 package wlsh.project.discordgames.catchmusic.application.hint.context;
 
-import wlsh.project.discordgames.catchmusic.application.TitleHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.Hint;
 import wlsh.project.discordgames.catchmusic.application.hint.TitleHintState;
+import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 
 import static wlsh.project.discordgames.catchmusic.application.hint.CharacterCategory.HANGUL;
-import static wlsh.project.discordgames.catchmusic.application.hint.CharacterCategory.SPECIAL;
+
 
 public class KoreanInitialHintState implements TitleHintState {
 

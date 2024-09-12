@@ -1,8 +1,8 @@
 package wlsh.project.discordgames.catchmusic.application.hint.context;
 
-import wlsh.project.discordgames.catchmusic.application.TitleHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.Hint;
 import wlsh.project.discordgames.catchmusic.application.hint.TitleHintState;
+import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 
 public class FirstLetterHintState implements TitleHintState {
     @Override

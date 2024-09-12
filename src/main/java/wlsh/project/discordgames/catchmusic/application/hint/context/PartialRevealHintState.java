@@ -1,9 +1,9 @@
 package wlsh.project.discordgames.catchmusic.application.hint.context;
 
-import wlsh.project.discordgames.catchmusic.application.TitleHintResult;
 import wlsh.project.discordgames.catchmusic.application.hint.Hint;
 import wlsh.project.discordgames.catchmusic.application.hint.HintCharacter;
 import wlsh.project.discordgames.catchmusic.application.hint.TitleHintState;
+import wlsh.project.discordgames.catchmusic.application.hint.dto.TitleHintResult;
 
 import java.util.HashSet;
 import java.util.List;

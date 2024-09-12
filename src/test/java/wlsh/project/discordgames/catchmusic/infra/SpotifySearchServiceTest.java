@@ -40,4 +40,17 @@ class SpotifySearchServiceTest {
         //then
         System.out.println("musicInfo = " + musicInfo);
     }
+
+    @Test
+    @DisplayName("asd")
+    void asd2() throws Exception {
+        //given
+
+
+        //when
+        MusicInfo musicInfo = spotifySearchService.searchMusicInfo(Music.of("LOST STARS", "ADAM LEVINE"));
+
+        //then
+        System.out.println("musicInfo = " + musicInfo);
+    }
 }

@@ -2,27 +2,27 @@ package wlsh.project.discordgames.catchmusic.application.hint;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import wlsh.project.discordgames.catchmusic.application.hint.dto.AlbumHintResult;
+import wlsh.project.discordgames.catchmusic.domain.Album;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusic;
 import wlsh.project.discordgames.catchmusic.domain.CatchMusicRepository;
-import wlsh.project.discordgames.catchmusic.domain.Round;
-import wlsh.project.discordgames.catchmusic.infra.spotify.MusicInfo;
+import wlsh.project.discordgames.catchmusic.domain.Music;
 import wlsh.project.discordgames.catchmusic.infra.spotify.SpotifySearchService;
+import wlsh.project.discordgames.common.catchgames.domain.CatchGameId;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AlbumHintService {
 
     private final CatchMusicRepository catchMusicRepository;
     private final SpotifySearchService spotifySearchService;
 
-    public AlbumHintResult getAlbumHint(String guildId) {
-        CatchMusic catchMusic = catchMusicRepository.findByGuildId(guildId)
+    public AlbumHintResult getAlbumHint(CatchGameId catchGameId) {
+        CatchMusic catchMusic = catchMusicRepository.findByCatchGameId(catchGameId)
                 .orElseThrow(() -> new RuntimeException("없음"));
-        Round round = catchMusic.getCurrentRound();
-        MusicInfo musicInfo = spotifySearchService.searchMusicInfo(round.getMusic());
-        return new AlbumHintResult(musicInfo.albumUrl(), musicInfo.albumName(), musicInfo.releaseDate());
+        Music music = catchMusic.getCurrentRound().getMusic();
+//        MusicInfo musicInfo = spotifySearchService.searchMusicInfo(music);
+        Album album = music.album();
+        return new AlbumHintResult(album.url(), album.name(), music.releaseDate());
     }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import static wlsh.project.discordgames.catchmusic.application.hint.CharacterCategory.WHITE_SPACE;
 
+
 @Getter
 @AllArgsConstructor
 public class HintCharacter {
