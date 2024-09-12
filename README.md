@@ -1,5 +1,6 @@
 # discord-games
 
+심심해서 만든
 
 ## 캐치 뮤직
 <img width="1201" alt="image" src="https://github.com/user-attachments/assets/9e480c91-5553-4dbc-bd01-c9ca7ead2536">
